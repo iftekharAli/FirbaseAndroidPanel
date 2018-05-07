@@ -8,21 +8,40 @@ namespace FirbaseAndroidPanel.Controllers
 {
     public class NotificationController : Controller
     {
-        private WapPortal_CMSEntities _context;
+        private  WapPortal_CMSEntities _context;
 
-        public NotificationController(WapPortal_CMSEntities context)
+        public NotificationController()
         {
-            _context = context;
+            _context=new  WapPortal_CMSEntities();
         }
+
 
         protected override void Dispose(bool disposing)
         {
-          _context.Dispose(); 
+            _context.Dispose();
         }
+
+        [HttpGet]
 
         // GET: Notification
         public ActionResult Index()
         {
+
+            string[] portalCodes = new[]
+            {
+                "EE9D65C0-A155-464C-A41F-D6FAF01D4B88",
+                "D17D271F-3947-4820-84D2-EBA9A271CC6B",
+                "0AF10DC9-EF8E-473A-AED4-0F6FA4E89BCE",
+                "884A44E2-9AD2-4677-997D-CE558EF8E522",
+                "600F213C-B834-4B99-AA56-63C0487D1C92",
+                "82008548-E6DC-4352-9F9E-1794084E1791"
+            };
+            var ddlForPortalName = _context.tbl_PortalMaster.Where(x => portalCodes.Contains(x.PortalCode)).Select(x=>new
+            {
+                Id=x.PortalCode,
+                Name = x.Title
+            }).ToList();
+            ViewData["PortalNames"] = ddlForPortalName;
             return View();
         }
     }

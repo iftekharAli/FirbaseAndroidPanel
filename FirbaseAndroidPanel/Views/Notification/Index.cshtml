@@ -1,0 +1,68 @@
+﻿@using System.Collections
+@model FirbaseAndroidPanel.Models.PortalModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<div ng-controller="cntrl" ng-app="myApp">
+    <div class="form-horizontal">
+        <h4>tbl_PortalMaster</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PortalName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.PortalName, new SelectList((IEnumerable)ViewData["PortalNames"], "Id", "Name"), "All", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PortalName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Category, new SelectList((IEnumerable)ViewData["PortalNames"], "Id", "Name"), "All", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubCategory, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SubCategory, new SelectList((IEnumerable)ViewData["PortalNames"], "Id", "Name"), "All", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SubCategory, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div ng-show="ss">
+            <div class="text-center">
+                
+                <h1>Angular Test</h1>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('cntrl',
+            function($scope, $http) {
+                $scope.ss = true;
+            });
+    </script>
+}
