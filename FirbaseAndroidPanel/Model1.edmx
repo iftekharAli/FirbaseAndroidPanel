@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WapPortal_CMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_PortalMaster">
+          <Key>
+            <PropertyRef Name="PortalCode" />
+          </Key>
+          <Property Name="PortalCode" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="PortalID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Caption" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NavigateUrl" Type="varchar" MaxLength="200" />
+          <Property Name="HeaderCode" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="FooterCode" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="ImageUrl" Type="varchar" MaxLength="200" />
+          <Property Name="AlterNetText" Type="varchar" MaxLength="50" />
+          <Property Name="PreviewUrl" Type="varchar" MaxLength="200" />
+          <Property Name="ParentCode" Type="varchar" MaxLength="36" />
+          <Property Name="SortNo" Type="int" />
+          <Property Name="ExtractLevel" Type="int" Nullable="false" />
+          <Property Name="DepthLevel" Type="int" Nullable="false" />
+          <Property Name="Expired" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="CSS" Type="varchar" MaxLength="50" />
+          <Property Name="ViewType" Type="varchar" MaxLength="10" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="IsLoginPage" Type="int" />
+          <Property Name="MainType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="WapPortal_CMSModelStoreContainer">
+          <EntitySet Name="tbl_PortalMaster" EntityType="Self.tbl_PortalMaster" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WapPortal_CMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_PortalMaster">
+          <Key>
+            <PropertyRef Name="PortalCode" />
+          </Key>
+          <Property Name="PortalCode" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PortalID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NavigateUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="HeaderCode" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FooterCode" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AlterNetText" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PreviewUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ParentCode" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="SortNo" Type="Int32" />
+          <Property Name="ExtractLevel" Type="Int32" Nullable="false" />
+          <Property Name="DepthLevel" Type="Int32" Nullable="false" />
+          <Property Name="Expired" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CSS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ViewType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="IsLoginPage" Type="Int32" />
+          <Property Name="MainType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="WapPortal_CMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_PortalMaster" EntityType="Self.tbl_PortalMaster" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WapPortal_CMSModelStoreContainer" CdmEntityContainer="WapPortal_CMSEntities">
+          <EntitySetMapping Name="tbl_PortalMaster">
+            <EntityTypeMapping TypeName="WapPortal_CMSModel.tbl_PortalMaster">
+              <MappingFragment StoreEntitySet="tbl_PortalMaster">
+                <ScalarProperty Name="PortalCode" ColumnName="PortalCode" />
+                <ScalarProperty Name="PortalID" ColumnName="PortalID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="NavigateUrl" ColumnName="NavigateUrl" />
+                <ScalarProperty Name="HeaderCode" ColumnName="HeaderCode" />
+                <ScalarProperty Name="FooterCode" ColumnName="FooterCode" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="AlterNetText" ColumnName="AlterNetText" />
+                <ScalarProperty Name="PreviewUrl" ColumnName="PreviewUrl" />
+                <ScalarProperty Name="ParentCode" ColumnName="ParentCode" />
+                <ScalarProperty Name="SortNo" ColumnName="SortNo" />
+                <ScalarProperty Name="ExtractLevel" ColumnName="ExtractLevel" />
+                <ScalarProperty Name="DepthLevel" ColumnName="DepthLevel" />
+                <ScalarProperty Name="Expired" ColumnName="Expired" />
+                <ScalarProperty Name="CSS" ColumnName="CSS" />
+                <ScalarProperty Name="ViewType" ColumnName="ViewType" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="IsLoginPage" ColumnName="IsLoginPage" />
+                <ScalarProperty Name="MainType" ColumnName="MainType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
