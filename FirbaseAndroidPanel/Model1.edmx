@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WapPortal_CMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WapPortal_CMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_PortalMaster">
           <Key>
             <PropertyRef Name="PortalCode" />
@@ -31,11 +31,14 @@
           <Property Name="IsLoginPage" Type="int" />
           <Property Name="MainType" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Function Name="sp_GetContentList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="portalcode" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="catcode" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="WapPortal_CMSModelStoreContainer">
           <EntitySet Name="tbl_PortalMaster" EntityType="Self.tbl_PortalMaster" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WapPortal_CMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -67,7 +70,16 @@
         </EntityType>
         <EntityContainer Name="WapPortal_CMSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbl_PortalMaster" EntityType="Self.tbl_PortalMaster" />
+          <FunctionImport Name="sp_GetContentList" ReturnType="Collection(WapPortal_CMSModel.sp_GetContentList_Result)">
+            <Parameter Name="portalcode" Mode="In" Type="String" />
+            <Parameter Name="catcode" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_GetContentList_Result">
+          <Property Type="String" Name="ContentCode" Nullable="false" MaxLength="36" />
+          <Property Type="String" Name="ContentTitle" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="imageUrl" Nullable="true" MaxLength="256" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -101,6 +113,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetContentList" FunctionName="WapPortal_CMSModel.Store.sp_GetContentList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WapPortal_CMSModel.sp_GetContentList_Result">
+                <ScalarProperty Name="ContentCode" ColumnName="ContentCode" />
+                <ScalarProperty Name="ContentTitle" ColumnName="ContentTitle" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

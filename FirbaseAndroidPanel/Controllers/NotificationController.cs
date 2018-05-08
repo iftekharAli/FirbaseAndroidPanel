@@ -9,16 +9,20 @@ namespace FirbaseAndroidPanel.Controllers
     public class NotificationController : Controller
     {
         private  WapPortal_CMSEntities _context;
+        private FirebaseEntities _contextFirebaseEntities;
+
 
         public NotificationController()
         {
             _context=new  WapPortal_CMSEntities();
+            _contextFirebaseEntities = new FirebaseEntities();
         }
 
 
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
+            _contextFirebaseEntities.Dispose();
         }
 
         [HttpGet]
@@ -42,6 +46,7 @@ namespace FirbaseAndroidPanel.Controllers
                 Name = x.Title
             }).ToList();
             ViewData["PortalNames"] = ddlForPortalName;
+           
             return View();
         }
     }

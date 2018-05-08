@@ -12,6 +12,8 @@ namespace FirbaseAndroidPanel
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class WapPortal_CMSEntities : DbContext
     {
@@ -26,5 +28,18 @@ namespace FirbaseAndroidPanel
         }
     
         public virtual DbSet<tbl_PortalMaster> tbl_PortalMaster { get; set; }
+    
+        public virtual ObjectResult<sp_GetContentList_Result> sp_GetContentList(string portalcode, string catcode)
+        {
+            var portalcodeParameter = portalcode != null ?
+                new ObjectParameter("portalcode", portalcode) :
+                new ObjectParameter("portalcode", typeof(string));
+    
+            var catcodeParameter = catcode != null ?
+                new ObjectParameter("catcode", catcode) :
+                new ObjectParameter("catcode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetContentList_Result>("sp_GetContentList", portalcodeParameter, catcodeParameter);
+        }
     }
 }
