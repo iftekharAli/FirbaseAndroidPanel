@@ -187,6 +187,7 @@
     <Compile Include="Controllers\DropDownAndListController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\ReportModifyController.cs" />
     <Compile Include="Controllers\TokenManageController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="C__MigrationHistory.cs">
@@ -237,6 +238,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DesktopNew.cs" />
     <Compile Include="Models\PortalModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendLogTable.cs">
@@ -357,6 +359,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
+    <Content Include="Views\ReportModify\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

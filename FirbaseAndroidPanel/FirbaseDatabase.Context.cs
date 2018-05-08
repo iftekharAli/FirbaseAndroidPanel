@@ -57,5 +57,7 @@ namespace FirbaseAndroidPanel
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_InsertToken_ForAllApps", msisdnParameter, serviceNameParameter, tokenParameter);
         }
+
+        public System.Data.Entity.DbSet<FirbaseAndroidPanel.Models.DesktopNew> DesktopNews { get; set; }
     }
 }

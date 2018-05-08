@@ -136,7 +136,7 @@ app.controller('cntrl',
                         //    $scope.catshow = true;
 
                         //}
-
+                        window.location.href = "../ReportModify";
                     });
 
 
