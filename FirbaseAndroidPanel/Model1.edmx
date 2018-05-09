@@ -35,6 +35,11 @@
           <Parameter Name="portalcode" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="catcode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="sp_getFirbaseBdtubeInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="contentcode" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="id" Type="nvarchar" Mode="In" />
+          <Parameter Name="refid" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="WapPortal_CMSModelStoreContainer">
           <EntitySet Name="tbl_PortalMaster" EntityType="Self.tbl_PortalMaster" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -74,11 +79,38 @@
             <Parameter Name="portalcode" Mode="In" Type="String" />
             <Parameter Name="catcode" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_getFirbaseBdtubeInfo" ReturnType="Collection(WapPortal_CMSModel.sp_getFirbaseBdtubeInfo_Result)">
+            <Parameter Name="contentcode" Mode="In" Type="String" />
+            <Parameter Name="id" Mode="In" Type="String" />
+            <Parameter Name="refid" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_GetContentList_Result">
           <Property Type="String" Name="ContentCode" Nullable="false" MaxLength="36" />
           <Property Type="String" Name="ContentTitle" Nullable="true" MaxLength="4000" />
           <Property Type="String" Name="imageUrl" Nullable="true" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="sp_getFirbaseBdtubeInfo_Result">
+          <Property Type="String" Name="ContentCode" Nullable="false" MaxLength="36" />
+          <Property Type="String" Name="ContentCategoryCode" Nullable="false" MaxLength="36" />
+          <Property Type="String" Name="ContentTitle" Nullable="true" />
+          <Property Type="String" Name="BigPreview" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ContentType" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ContentZedCode" Nullable="false" MaxLength="36" />
+          <Property Type="Double" Name="Value" Nullable="false" />
+          <Property Type="String" Name="CommentCount" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Artist" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="imageUrl" Nullable="true" MaxLength="256" />
+          <Property Type="DateTime" Name="LiveDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TimeStamp" Nullable="true" MaxLength="30" />
+          <Property Type="Int64" Name="totalLike" Nullable="true" />
+          <Property Type="Int64" Name="totalView" Nullable="true" />
+          <Property Type="String" Name="PhysicalFileName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="duration" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Info" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Genre" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="isHd" Nullable="false" />
+          <Property Type="String" Name="Refid" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -119,6 +151,32 @@
                 <ScalarProperty Name="ContentCode" ColumnName="ContentCode" />
                 <ScalarProperty Name="ContentTitle" ColumnName="ContentTitle" />
                 <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_getFirbaseBdtubeInfo" FunctionName="WapPortal_CMSModel.Store.sp_getFirbaseBdtubeInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WapPortal_CMSModel.sp_getFirbaseBdtubeInfo_Result">
+                <ScalarProperty Name="ContentCode" ColumnName="ContentCode" />
+                <ScalarProperty Name="ContentCategoryCode" ColumnName="ContentCategoryCode" />
+                <ScalarProperty Name="ContentTitle" ColumnName="ContentTitle" />
+                <ScalarProperty Name="BigPreview" ColumnName="BigPreview" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ContentZedCode" ColumnName="ContentZedCode" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="CommentCount" ColumnName="CommentCount" />
+                <ScalarProperty Name="Artist" ColumnName="Artist" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="LiveDate" ColumnName="LiveDate" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="totalLike" ColumnName="totalLike" />
+                <ScalarProperty Name="totalView" ColumnName="totalView" />
+                <ScalarProperty Name="PhysicalFileName" ColumnName="PhysicalFileName" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="isHd" ColumnName="isHd" />
+                <ScalarProperty Name="Refid" ColumnName="Refid" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

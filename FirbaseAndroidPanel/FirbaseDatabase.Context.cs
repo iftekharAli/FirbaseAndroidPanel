@@ -40,6 +40,7 @@ namespace FirbaseAndroidPanel
         public virtual DbSet<UrlClickLog> UrlClickLogs { get; set; }
         public virtual DbSet<UrlManage> UrlManages { get; set; }
         public virtual DbSet<tbl_PushMessage_ForAllApps> tbl_PushMessage_ForAllApps { get; set; }
+        public virtual DbSet<UrlClickLogs_ForAllApps> UrlClickLogs_ForAllApps { get; set; }
     
         public virtual ObjectResult<string> sp_InsertToken_ForAllApps(string msisdn, string serviceName, string token)
         {
@@ -57,7 +58,5 @@ namespace FirbaseAndroidPanel
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_InsertToken_ForAllApps", msisdnParameter, serviceNameParameter, tokenParameter);
         }
-
-        public System.Data.Entity.DbSet<FirbaseAndroidPanel.Models.DesktopNew> DesktopNews { get; set; }
     }
 }

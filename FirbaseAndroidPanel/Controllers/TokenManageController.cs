@@ -59,5 +59,17 @@ namespace FirbaseAndroidPanel.Controllers
                 new SqlParameter("@id", aa));
             return Ok();
         }
+
+        [HttpPost]
+        public object UrlClickLog(UrlClickLogs_ForAllApps allApps)
+        {
+            allApps.TimeStamp=DateTime.Now;
+            _contextFirebaseEntities.UrlClickLogs_ForAllApps.Add(allApps);
+            _contextFirebaseEntities.SaveChanges();
+            return Ok(new
+            {
+                result = "success"
+            });
+        }
     }
 }

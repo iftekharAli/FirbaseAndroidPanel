@@ -41,5 +41,22 @@ namespace FirbaseAndroidPanel
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetContentList_Result>("sp_GetContentList", portalcodeParameter, catcodeParameter);
         }
+    
+        public virtual ObjectResult<sp_getFirbaseBdtubeInfo_Result> sp_getFirbaseBdtubeInfo(string contentcode, string id, string refid)
+        {
+            var contentcodeParameter = contentcode != null ?
+                new ObjectParameter("contentcode", contentcode) :
+                new ObjectParameter("contentcode", typeof(string));
+    
+            var idParameter = id != null ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(string));
+    
+            var refidParameter = refid != null ?
+                new ObjectParameter("refid", refid) :
+                new ObjectParameter("refid", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getFirbaseBdtubeInfo_Result>("sp_getFirbaseBdtubeInfo", contentcodeParameter, idParameter, refidParameter);
+        }
     }
 }

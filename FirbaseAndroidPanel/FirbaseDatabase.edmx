@@ -139,6 +139,14 @@
           <Property Name="RefId" Type="int" Nullable="false" />
           <Property Name="TimeStamp" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="UrlClickLogs_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefId" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="UrlManages">
           <Key>
             <PropertyRef Name="Id" />
@@ -165,6 +173,7 @@
           <EntitySet Name="tbl_PushMessage_ForAllApps" EntityType="Self.tbl_PushMessage_ForAllApps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TokenInfois" EntityType="Self.TokenInfois" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UrlClickLogs" EntityType="Self.UrlClickLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UrlClickLogs_ForAllApps" EntityType="Self.UrlClickLogs_ForAllApps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UrlManages" EntityType="Self.UrlManages" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -319,6 +328,7 @@
             <Parameter Name="token" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="tbl_PushMessage_ForAllApps" EntityType="FirebaseModel.tbl_PushMessage_ForAllApps" />
+          <EntitySet Name="UrlClickLogs_ForAllApps" EntityType="FirebaseModel.UrlClickLogs_ForAllApps" />
         </EntityContainer>
         <EntityType Name="tbl_PushMessage_ForAllApps">
           <Key>
@@ -332,6 +342,14 @@
           <Property Name="ProcessTime" Type="DateTime" Precision="3" />
           <Property Name="TimeStamp" Type="DateTime" Precision="3" />
           <Property Name="ServiceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UrlClickLogs_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefId" Type="Int32" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -490,6 +508,15 @@
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="Body" ColumnName="Body" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UrlClickLogs_ForAllApps">
+            <EntityTypeMapping TypeName="FirebaseModel.UrlClickLogs_ForAllApps">
+              <MappingFragment StoreEntitySet="UrlClickLogs_ForAllApps">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
