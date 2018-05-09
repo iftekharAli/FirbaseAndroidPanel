@@ -2,7 +2,7 @@
 app.controller('cntrl',
     function ($scope, $http) {
        // var raw = "../api/";
-        var raw = "http://wap.shabox.mobi/fbandroid/api/";
+        var raw = "https://wap.shabox.mobi/fbandroid/api/";
         $scope.catshow = false;
         $scope.subcatshow = false;
         $scope.ListOfContentShow = false;
@@ -136,7 +136,7 @@ app.controller('cntrl',
                         //    $scope.catshow = true;
 
                         //}
-                        window.location.href = "../ReportModify";
+                        window.location.href = "https://wap.shabox.mobi/fbandroid/ReportModify";
                     });
 
 

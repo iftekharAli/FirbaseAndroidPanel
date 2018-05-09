@@ -32,9 +32,26 @@ namespace FirbaseAndroidPanel.Controllers
                 new SqlParameter("@id", backModel.Id),
                 new SqlParameter("@refid", backModel.RefId)
             ).ToList();
+
             return Ok(new
             {
                 NotificationResult= Result
+            });
+        }
+
+        [HttpPost]
+        public object ClubzResult(HitBackModel backModel)
+        {
+            var Result = _context.Database.SqlQuery<sp_getFirbaseClubzInfo_Result>(
+                "sp_getFirbaseClubzInfo @contentcode,@id,@refid",
+                new SqlParameter("@contentcode", backModel.ContentCode),
+                new SqlParameter("@id", backModel.Id),
+                new SqlParameter("@refid", backModel.RefId)
+            ).ToList();
+
+            return Ok(new
+            {
+                NotificationResult = Result
             });
         }
     }

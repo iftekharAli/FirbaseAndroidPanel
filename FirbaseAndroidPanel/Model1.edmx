@@ -40,6 +40,11 @@
           <Parameter Name="id" Type="nvarchar" Mode="In" />
           <Parameter Name="refid" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="sp_getFirbaseClubzInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="contentcode" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="id" Type="nvarchar" Mode="In" />
+          <Parameter Name="refid" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="WapPortal_CMSModelStoreContainer">
           <EntitySet Name="tbl_PortalMaster" EntityType="Self.tbl_PortalMaster" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -84,6 +89,11 @@
             <Parameter Name="id" Mode="In" Type="String" />
             <Parameter Name="refid" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_getFirbaseClubzInfo" ReturnType="Collection(WapPortal_CMSModel.sp_getFirbaseClubzInfo_Result)">
+            <Parameter Name="contentcode" Mode="In" Type="String" />
+            <Parameter Name="id" Mode="In" Type="String" />
+            <Parameter Name="refid" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_GetContentList_Result">
           <Property Type="String" Name="ContentCode" Nullable="false" MaxLength="36" />
@@ -111,6 +121,24 @@
           <Property Type="String" Name="Genre" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="isHd" Nullable="false" />
           <Property Type="String" Name="Refid" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="sp_getFirbaseClubzInfo_Result">
+          <Property Type="DateTime" Name="LiveDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="MessageBody" Nullable="true" />
+          <Property Type="String" Name="RefId" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="contentcode" Nullable="false" MaxLength="36" />
+          <Property Type="String" Name="catgorycode" Nullable="true" MaxLength="36" />
+          <Property Type="String" Name="ContentTile" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="physicalfilename" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="zid" Nullable="true" MaxLength="36" />
+          <Property Type="String" Name="path" Nullable="true" MaxLength="1359" />
+          <Property Type="String" Name="imageUrl" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="info" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="duration" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="genre" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="totalLike" Nullable="true" />
+          <Property Type="Int64" Name="totalView" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -177,6 +205,28 @@
                 <ScalarProperty Name="Genre" ColumnName="Genre" />
                 <ScalarProperty Name="isHd" ColumnName="isHd" />
                 <ScalarProperty Name="Refid" ColumnName="Refid" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_getFirbaseClubzInfo" FunctionName="WapPortal_CMSModel.Store.sp_getFirbaseClubzInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WapPortal_CMSModel.sp_getFirbaseClubzInfo_Result">
+                <ScalarProperty Name="LiveDate" ColumnName="LiveDate" />
+                <ScalarProperty Name="MessageBody" ColumnName="MessageBody" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="contentcode" ColumnName="contentcode" />
+                <ScalarProperty Name="catgorycode" ColumnName="catgorycode" />
+                <ScalarProperty Name="ContentTile" ColumnName="ContentTile" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="physicalfilename" ColumnName="physicalfilename" />
+                <ScalarProperty Name="zid" ColumnName="zid" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="info" ColumnName="info" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="genre" ColumnName="genre" />
+                <ScalarProperty Name="totalLike" ColumnName="totalLike" />
+                <ScalarProperty Name="totalView" ColumnName="totalView" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
