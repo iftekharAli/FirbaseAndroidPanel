@@ -19,6 +19,8 @@
         <EntityTypeShape EntityType="FirebaseModel.UrlManage" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FirebaseModel.tbl_PushMessage_ForAllApps" Width="1.5" PointX="9.375" PointY="3.75" />
         <EntityTypeShape EntityType="FirebaseModel.UrlClickLogs_ForAllApps" Width="1.5" PointX="9.375" PointY="7.75" />
+        <EntityTypeShape EntityType="FirebaseModel.FailedLogs_ForAllApps" Width="1.5" PointX="7.375" PointY="10.75" />
+        <EntityTypeShape EntityType="FirebaseModel.SendLogTables_ForAllApps" Width="1.5" PointX="9.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

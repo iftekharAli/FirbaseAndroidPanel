@@ -23,4 +23,9 @@ namespace FirbaseAndroidPanel.Models
         public string PortalCode { get; set; }
         public string CatCode { get; set; }
     }
+    public class TokenModel
+    {
+        public string token { get; set; }
+        public int Id { get; set; }
+    }
 }

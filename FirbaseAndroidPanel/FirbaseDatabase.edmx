@@ -24,6 +24,15 @@
           <Property Name="RefId" Type="int" Nullable="false" />
           <Property Name="TimeStamp" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="FailedLogs_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="RefId" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Firebase_TokenInfo_ForAllApps">
           <Key>
             <PropertyRef Name="Id" />
@@ -56,6 +65,15 @@
           <Property Name="TimeStamp" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="SendLogTables">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="RefId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SendLogTables_ForAllApps">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -163,10 +181,12 @@
         <EntityContainer Name="FirebaseModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FailedLogs" EntityType="Self.FailedLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FailedLogs_ForAllApps" EntityType="Self.FailedLogs_ForAllApps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Firebase_TokenInfo_ForAllApps" EntityType="Self.Firebase_TokenInfo_ForAllApps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImageUploads" EntityType="Self.ImageUploads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logins" EntityType="Self.Logins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SendLogTables" EntityType="Self.SendLogTables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SendLogTables_ForAllApps" EntityType="Self.SendLogTables_ForAllApps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_AccessLogGlobal" EntityType="Self.tbl_AccessLogGlobal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_FirebaseSendDesktopNotification" EntityType="Self.tbl_FirebaseSendDesktopNotification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_PushMessage" EntityType="Self.tbl_PushMessage" Schema="dbo" store:Type="Tables" />
@@ -329,6 +349,8 @@
           </FunctionImport>
           <EntitySet Name="tbl_PushMessage_ForAllApps" EntityType="FirebaseModel.tbl_PushMessage_ForAllApps" />
           <EntitySet Name="UrlClickLogs_ForAllApps" EntityType="FirebaseModel.UrlClickLogs_ForAllApps" />
+          <EntitySet Name="FailedLogs_ForAllApps" EntityType="FirebaseModel.FailedLogs_ForAllApps" />
+          <EntitySet Name="SendLogTables_ForAllApps" EntityType="FirebaseModel.SendLogTables_ForAllApps" />
         </EntityContainer>
         <EntityType Name="tbl_PushMessage_ForAllApps">
           <Key>
@@ -350,6 +372,24 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RefId" Type="Int32" Nullable="false" />
           <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="FailedLogs_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RefId" Type="Int32" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="SendLogTables_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RefId" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -517,6 +557,26 @@
               <MappingFragment StoreEntitySet="UrlClickLogs_ForAllApps">
                 <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
                 <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FailedLogs_ForAllApps">
+            <EntityTypeMapping TypeName="FirebaseModel.FailedLogs_ForAllApps">
+              <MappingFragment StoreEntitySet="FailedLogs_ForAllApps">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SendLogTables_ForAllApps">
+            <EntityTypeMapping TypeName="FirebaseModel.SendLogTables_ForAllApps">
+              <MappingFragment StoreEntitySet="SendLogTables_ForAllApps">
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

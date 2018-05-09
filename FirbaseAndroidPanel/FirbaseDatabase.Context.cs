@@ -41,6 +41,8 @@ namespace FirbaseAndroidPanel
         public virtual DbSet<UrlManage> UrlManages { get; set; }
         public virtual DbSet<tbl_PushMessage_ForAllApps> tbl_PushMessage_ForAllApps { get; set; }
         public virtual DbSet<UrlClickLogs_ForAllApps> UrlClickLogs_ForAllApps { get; set; }
+        public virtual DbSet<FailedLogs_ForAllApps> FailedLogs_ForAllApps { get; set; }
+        public virtual DbSet<SendLogTables_ForAllApps> SendLogTables_ForAllApps { get; set; }
     
         public virtual ObjectResult<string> sp_InsertToken_ForAllApps(string msisdn, string serviceName, string token)
         {

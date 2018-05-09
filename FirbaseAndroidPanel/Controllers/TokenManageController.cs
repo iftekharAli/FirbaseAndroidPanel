@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using FirbaseAndroidPanel.Models;
 
 namespace FirbaseAndroidPanel.Controllers
 {
@@ -70,6 +71,49 @@ namespace FirbaseAndroidPanel.Controllers
             {
                 result = "success"
             });
+        }
+
+
+        [HttpPost]
+        public object SendLog([FromBody] TokenModel tokenModel)
+        {
+            var SendLog = new SendLogTables_ForAllApps()
+            {
+                RefId = tokenModel.Id,
+                Token = tokenModel.token,
+                TimeStamp = DateTime.Now
+            };
+            _contextFirebaseEntities.SendLogTables_ForAllApps.Add(SendLog);
+            _contextFirebaseEntities.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.Accepted,
+                ""
+            );
+        }
+
+        [HttpPost]
+        public object FailedLog([FromBody] TokenModel s)
+        {
+            var FailedLog = new FailedLogs_ForAllApps()
+            {
+                RefId = s.Id,
+                Token = s.token,
+                TimeStamp = DateTime.Now
+            };
+            _contextFirebaseEntities.FailedLogs_ForAllApps.Add(FailedLog);
+            _contextFirebaseEntities.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.Accepted,
+                ""
+            );
+        }
+        [HttpPost]
+        public object DeactiveToken([FromBody] TokenModel s)
+        {
+            var dTokenInfois = _contextFirebaseEntities.Firebase_TokenInfo_ForAllApps.Where(f => s.token.Contains(f.Token)).ToList();
+            dTokenInfois.ForEach(a => a.IsActive = 0);
+            _contextFirebaseEntities.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.Accepted,
+                ""
+            );
         }
     }
 }
