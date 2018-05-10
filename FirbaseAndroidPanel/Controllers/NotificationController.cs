@@ -45,6 +45,8 @@ namespace FirbaseAndroidPanel.Controllers
                 Id=x.PortalCode,
                 Name = x.Title
             }).ToList();
+          
+            ddlForPortalName.Insert(4, new {Id = "stk", Name = "Amar Sticker" });
             ViewData["PortalNames"] = ddlForPortalName;
            
             return View();

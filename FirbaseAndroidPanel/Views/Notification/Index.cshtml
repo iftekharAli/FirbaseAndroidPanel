@@ -17,7 +17,7 @@
             <div class="">
                 @Html.LabelFor(model => model.PortalName, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-lg-2" })
                 <div class="col-md-3 col-sm-3 col-lg-3">
-                    @Html.DropDownListFor(model => model.PortalName, new SelectList((IEnumerable)ViewData["PortalNames"], "Id", "Name"), "All", new { @class = "form-control", ng_model = "pName", ng_change = "update()" })
+                    @Html.DropDownListFor(model => model.PortalName, new SelectList((IEnumerable)ViewData["PortalNames"], "Id", "Name"), "Select Portal", new { @class = "form-control", ng_model = "pName", ng_change = "update()" })
                     @Html.ValidationMessageFor(model => model.PortalName, "", new { @class = "text-danger" })
                 </div>
             </div>

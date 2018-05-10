@@ -1,8 +1,8 @@
 ﻿var app = angular.module('myApp', []);
 app.controller('cntrl',
     function ($scope, $http) {
-        var raw = "../api/";
-      //  var raw = "https://wap.shabox.mobi/fbandroid/api/";
+     //   var raw = "../api/";
+        var raw = "https://wap.shabox.mobi/fbandroid/api/";
         $scope.catshow = false;
         $scope.subcatshow = false;
         $scope.ListOfContentShow = false;
@@ -40,7 +40,9 @@ app.controller('cntrl',
                 if (response.data.length > 0) {
                     $scope.CatList = response.data;
                     $scope.catshow = true;
-                  
+
+                } else if ($scope.pName === 'stk') {
+                    $scope.subdateshow = true;
                 }
                 
             });
@@ -161,20 +163,46 @@ app.controller('cntrl',
                 CatCode: catCodeFinal
             };
             console.log(dataList);
-            $http.post(raw + 'DropDownAndList/ContentList', dataList).then(function (response) {
-                if (response.data.length > 0) {
-                    $scope.ListOfContentShow = true;
-                    $scope.subdateshow = true;
-                    $scope.noData = false;
-                    $scope.listOfContents = response.data;
-                } else {
-                    $scope.ListOfContentShow = false;
-                    $scope.noData = true;
-                }
-               
-                console.log(response.data);
 
-            });
+
+            if ($scope.pName === 'stk') {
+
+
+                $http.post(raw + 'DropDownAndList/ContentList', dataList).then(function(response) {
+
+                    if (response.data.length > 0) {
+                        $scope.ListOfContentShow = true;
+                        $scope.subdateshow = true;
+                        $scope.noData = false;
+                        $scope.listOfContents = response.data;
+                    }
+                    else {
+                        $scope.ListOfContentShow = false;
+                        $scope.noData = true;
+                    }
+                });
+            }
+
+            else {
+
+
+                $http.post(raw + 'DropDownAndList/ContentList', dataList).then(function (response) {
+                    if (response.data.length > 0) {
+                        $scope.ListOfContentShow = true;
+                        $scope.subdateshow = true;
+                        $scope.noData = false;
+                        $scope.listOfContents = response.data;
+                    } else {
+                        $scope.ListOfContentShow = false;
+                        $scope.noData = true;
+                    }
+
+                    console.log(response.data);
+
+                });
+            }
+
+        
 
         }
     });

@@ -46,11 +46,21 @@ namespace FirbaseAndroidPanel.Controllers
         [HttpPost]
         public object ContentList(ContentList contentList)
         {
-            var listOfContents = _context.Database.SqlQuery<sp_GetContentList_Result>("sp_GetContentList @portalcode,@catcode",
-                new SqlParameter("@portalcode", contentList.PortalCode??"123"),
-                new SqlParameter("@catcode", contentList.CatCode??"123")
+            if (contentList.PortalCode == "stk")
+            {
+                var listOfContents = _context.Database.SqlQuery<sp_GetContentList_Result>("sp_GetContentList_stk").ToList();
+                return Ok(listOfContents);
+            }
+            else
+            {
+                var listOfContents = _context.Database.SqlQuery<sp_GetContentList_Result>("sp_GetContentList @portalcode,@catcode",
+                    new SqlParameter("@portalcode", contentList.PortalCode ?? "123"),
+                    new SqlParameter("@catcode", contentList.CatCode ?? "123")
                 ).ToList();
-            return Ok(listOfContents);
+                return Ok(listOfContents);
+            }
+           
+          
         }
         [HttpGet]
         public object FirebasePortalNames()
