@@ -41,17 +41,7 @@ namespace FirbaseAndroidPanel.Controllers
         [HttpPost]
         public IHttpActionResult SavePushMessage(tbl_PushMessage_ForAllApps allApps)
         {
-            //var id =  _contextFirebaseEntities.tbl_PushMessage_ForAllApps.Add(new tbl_PushMessage_ForAllApps()
-            // {
-            //    ServiceName = allApps.ServiceName,
-            //     Title = allApps.Title,
-            //     Body = allApps.Body,
-            //     ContentCode = allApps.ContentCode,
-            //     ImageUrl = allApps.ImageUrl,
-            //     ProcessTime = allApps.ProcessTime,
-            //     TimeStamp = DateTime.Now
 
-            // });
             allApps.TimeStamp = DateTime.Now;
             _contextFirebaseEntities.tbl_PushMessage_ForAllApps.Add(allApps);
             _contextFirebaseEntities.SaveChanges();
