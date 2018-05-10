@@ -30,7 +30,10 @@ namespace FirbaseAndroidPanel.Controllers
         // GET: Notification
         public ActionResult Index()
         {
-
+            if (Session["Uid"] == null)
+            {
+                 return RedirectToAction("Index", "Login");
+            }
             string[] portalCodes = new[]
             {
                 "EE9D65C0-A155-464C-A41F-D6FAF01D4B88",

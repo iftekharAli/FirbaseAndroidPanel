@@ -14,4 +14,9 @@ namespace FirbaseAndroidPanel.Models
         public DateTime ProcessTime { get; set; }
         public DateTime TimeStamp { get; set; }
     }
+    public class Logins
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+    }
 }

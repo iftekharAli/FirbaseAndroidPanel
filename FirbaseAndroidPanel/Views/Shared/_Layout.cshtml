@@ -19,11 +19,18 @@
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+            @if (Session["Uid"] != null)
+            {
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Notification", "Index", "Notification", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Message", "Index", "ReportModify", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Notification", "Index", "Notification", new {area = ""}, null)</li>
+                    <li>@Html.ActionLink("Message", "Index", "ReportModify", new {area = ""}, null)</li>
+                    <li>@Html.ActionLink("API", "Index", "Help", new {area = ""}, null)</li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @Html.ActionLink("Logout", "Logout", "Login", new {area = ""}, new {@class = "navbar-brand glyphicon glyphicon-log-in"})
+
+                </ul>
+            }
             </div>
         </div>
     </div>

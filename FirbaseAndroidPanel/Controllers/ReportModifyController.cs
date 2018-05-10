@@ -24,6 +24,10 @@ namespace FirbaseAndroidPanel.Controllers
         // GET: ReportModify
         public ActionResult Index()
         {
+            if (Session["Uid"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var Data = _contextFirebaseEntities.Database.SqlQuery<DesktopNew>("EXEC Firebase.dbo.sp_getPushData_ForAllApps").ToList();
             return View(Data);
         }
@@ -32,8 +36,7 @@ namespace FirbaseAndroidPanel.Controllers
         {
             if (Session["Uid"] == null)
             {
-              //  return RedirectToAction("Index", "Login");
-
+                return RedirectToAction("Index", "Login");
             }
             _contextFirebaseEntities.Database.ExecuteSqlCommand("EXEC Firebase.dbo.sp_DeletePushMessage_ForAllApps @id", new SqlParameter("@id", id));
             _contextFirebaseEntities.Database.ExecuteSqlCommand("EXEC Firebase.dbo.sp_DeletePushMessageFromTokenInfo_ForAllApps @id", new SqlParameter("@id", id));
