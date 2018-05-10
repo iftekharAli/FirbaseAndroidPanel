@@ -41,14 +41,28 @@ namespace FirbaseAndroidPanel.Controllers
         [HttpPost]
         public IHttpActionResult SavePushMessage(tbl_PushMessage_ForAllApps allApps)
         {
-
-            allApps.TimeStamp = DateTime.Now;
-            _contextFirebaseEntities.tbl_PushMessage_ForAllApps.Add(allApps);
-            _contextFirebaseEntities.SaveChanges();
-            var aa = allApps.Id;
-            _contextFirebaseEntities.Database.ExecuteSqlCommand("sp_InsertIntoDesktopTableRenew_ForAllApps @id",
-                new SqlParameter("@id", aa));
-            return Ok();
+           
+            if (string.IsNullOrWhiteSpace(allApps.Body) || string.IsNullOrWhiteSpace(allApps.Title))
+            {
+                return Ok(new
+                {
+                    result="Failed"
+                });
+            }
+            else
+            {
+                allApps.TimeStamp = DateTime.Now;
+                _contextFirebaseEntities.tbl_PushMessage_ForAllApps.Add(allApps);
+                _contextFirebaseEntities.SaveChanges();
+                var aa = allApps.Id;
+                _contextFirebaseEntities.Database.ExecuteSqlCommand("sp_InsertIntoDesktopTableRenew_ForAllApps @id",
+                    new SqlParameter("@id", aa));
+                return Ok(new
+                {
+                    result = "Success"
+                });
+            }
+           
         }
 
         [HttpPost]

@@ -142,6 +142,7 @@
                         <input type="checkbox"
                                value="{{x.ContentCode}}"
                                ng-click="toggleSelection($event,x.ContentCode,x.imageUrl)"
+                               ng-model-options="{getterSetter: true}"
                                >
                     </td>
                     <td class="text-center" style="width: 50%"><img src="{{x.imageUrl}}" class="img-responsive" /></td>

@@ -1,8 +1,8 @@
 ﻿var app = angular.module('myApp', []);
 app.controller('cntrl',
     function ($scope, $http) {
-     //   var raw = "../api/";
-        var raw = "https://wap.shabox.mobi/fbandroid/api/";
+       // var raw = "../api/";
+       var raw = "https://wap.shabox.mobi/fbandroid/api/";
         $scope.catshow = false;
         $scope.subcatshow = false;
         $scope.ListOfContentShow = false;
@@ -15,6 +15,7 @@ app.controller('cntrl',
             tt = $("#qq").val();
           //  alert(tt);
         });
+
 
         $http.get(raw + 'DropDownAndList/FirebasePortalNames').then(function (response) {
             console.log(response.data);
@@ -100,11 +101,14 @@ app.controller('cntrl',
 
                 };
                 datat.push(datats);
-               
+
                 //for (var i = 1; i <= 20; i++) {
                 //    datat.push(datats);
                 //};
                 console.log(datat);
+            } else {
+                datat = [];
+
             }
           
            
@@ -125,20 +129,34 @@ app.controller('cntrl',
                 if ($scope.ListOfContentShow) {
 
                     var datainserpust = {
-                        Title: pushtextTitle,
-                        Body: pushtext
+                        Title: $scope.pushTxtTitle,
+                        Body: $scope.pushTxt
                     }
            //         alert(datainserpust);
           //          alert('ddd00');
           //          console.log(datat);
-                    $http.post(raw + 'TokenManage/SavePushMessage', datat[0] ).then(function(response) {
+                    $scope.final = datat[0];
+                    console.log($scope.final);
+                    $scope.final.Title = $scope.pushTxtTitle;
+                    $scope.final.Body = $scope.pushTxt;
+                    $scope.final.ProcessTime = tt;
+                    $scope.final.ServiceName = $scope.fireporalId;
+                    console.log($scope.final);
+                    $http.post(raw + 'TokenManage/SavePushMessage', $scope.final ).then(function(response) {
                         //console.log(response.data);
                         //if (response.data.length > 0) {
                         //    $scope.CatList = response.data;
                         //    $scope.catshow = true;
 
                         //}
-                        window.location.href = "https://wap.shabox.mobi/fbandroid/ReportModify";
+                      //  console.log(response.data.result);
+                        if (response.data.result === 'Failed') {
+                            window.location.href = "https://wap.shabox.mobi/fbandroid/";
+                        } else {
+                            window.location.href = "https://wap.shabox.mobi/fbandroid/ReportModify";
+
+                        }
+                            
                     });
 
 
