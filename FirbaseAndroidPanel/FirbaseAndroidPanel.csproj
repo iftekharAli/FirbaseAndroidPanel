@@ -447,6 +447,7 @@
     <Content Include="HOICHOI.edmx.diagram">
       <DependentUpon>HOICHOI.edmx</DependentUpon>
     </Content>
+    <Content Include="Scripts\CusScripts\customScript.js" />
     <Content Include="Scripts\dropdownsongster.js" />
     <Content Include="Scripts\dropdown.js" />
     <Content Include="Content\bootstrap-datepicker3.standalone.css.map" />
