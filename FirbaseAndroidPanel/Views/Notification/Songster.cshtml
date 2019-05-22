@@ -1,0 +1,99 @@
+﻿
+
+@{
+    Layout = null;
+}
+<html>
+
+<body>
+    <h2>Songster</h2>
+    <div>
+        <div class="form-horizontal">
+            <h4>Firebase Android</h4>
+            <hr />
+
+
+        </div>
+
+
+
+        <form method="post" id="f">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <label class="control-label col-md-2" for="uid">Owner Name</label>
+                    <div class="col-md-12 col-lg-12 col-sm-12 form-group" id="uid">
+                        <input type="text" name="ownerName" id="o" />
+                    </div>
+                </div>
+
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <label class="control-label col-md-2" for="pmbid">Song Name</label>
+                    <div class="col-md-12 col-lg-12 col-sm-12 form-group" id="ucaption">
+                        <input type="text" name="songName" id="s"/>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-2">
+                    <input id="search" type="button" value="Search" class="btn btn-danger" />
+                </div>
+            </div>
+
+        </form>
+
+
+
+        <table id="tbl"></table>
+
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+           
+            $("#search").click(function () {
+                var data = {
+
+                    ownerName: $("o").val(),
+                    songName: $("s").val()
+
+                };
+                console.log('hhh' + data);
+                console.log($("#f").serialize());
+                $.ajax({
+                    url: "../api/Search/Songster",
+                    type: "post",
+                    data: data,
+                    dataType: 'json',
+                    success: function (d) {
+
+                        $.each(d, function (i, value) {
+
+                            $("#tbl").append("<tr> <td>"+ value.SongName+" </td>");
+                        });
+                    }
+                });
+
+
+            });
+
+        });
+
+
+    </script>
+</body>
+
+</html>

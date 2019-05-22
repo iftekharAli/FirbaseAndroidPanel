@@ -1,0 +1,54 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title></title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="form-group">
+        <label>Date of Birth</label>
+        <div class='input-group date' id='datetimepicker1'>
+            <input type='text' class="form-control" name="DateOfBirth" id="dateTimeID" />
+            <span id="date" class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script>
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+
+
+        $(document).ready(function () {
+
+
+
+        });
+
+
+
+
+    </script>
+
+</body>
+</html>

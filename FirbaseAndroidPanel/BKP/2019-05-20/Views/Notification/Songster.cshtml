@@ -1,0 +1,206 @@
+﻿@using System.Collections
+@model FirbaseAndroidPanel.Models.PortalModel
+@{
+    ViewBag.Title = "Songster";
+}
+
+<h2>Songster</h2>
+<div ng-controller="cntrl" ng-app="myApp">
+    <div class="form-horizontal">
+        <h4>Firebase Android</h4>
+        <hr />
+
+        <div class="row">
+            <div class="">
+                @Html.LabelFor(model => model.PortalName, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-lg-2" })
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    @Html.DropDownListFor(model => model.PortalName, new SelectList((IEnumerable)ViewData["PortalNames"], "Id", "Name"), "Select Portal", new { @class = "form-control", ng_model = "pName", ng_change = "update()" })
+                    @Html.ValidationMessageFor(model => model.PortalName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="" ng-show="catshow">
+                @*<label class="control-label col-md-2 col-sm-2 col-lg-2" for="cid">Category</label>
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    <select class="form-control" ng-model="catId" ng-change="updateSubCat()" id="cid">
+                        <option ng-repeat="Year in CatList" value="{{Year.Id}}">{{Year.Name}}</option>
+                        <option value=""> please Select Category </option>
+                    </select>
+                </div>*@
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+
+            <div class="" ng-show="subcatshow">
+                @*<label class="control-label col-md-2" for="sid">SubCategory</label>
+
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    <select class="form-control" ng-model="subCatId" id="sid">
+                        <option ng-repeat="Year in SubCatList" value="{{Year.Id}}">{{Year.Name}}</option>
+                        <option value=""> please Select SubCategory </option>
+                    </select>
+
+                </div>*@
+            </div>
+
+
+            <div class="" ng-show="subdateshow1">
+                <label class="control-label col-md-2" for="sid">Date</label>
+
+                <div class="col-md-5 col-sm-5 col-lg-5">
+                    <div class="">
+                        <div class='input-group date col-md-7' id='datetimepicker1'>
+                            <input type='datetime' id="qq" ng-model="sendTime1" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <br />
+        <div class="row">
+            @*<div class="col-md-12 col-lg-12 col-sm-12">
+
+
+                <div class="">
+                    <label class="control-label col-md-2" for="fireid">FireBase Portal Name</label>
+
+                    <div class="col-md-3 col-sm-3 col-lg-3">
+                        <select class="form-control" ng-model="fireporalId" id="fireid">
+                            <option ng-repeat="Year in fireportal" value="{{Year.Id}}">{{Year.Name}}</option>
+                            <option value=""> Portal To send Notification </option>
+                        </select>
+
+                    </div>
+                </div>
+
+            </div>*@
+
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <label class="control-label col-md-2" for="ptbid">Message Title</label>
+                <div class="col-md-12 col-lg-12 col-sm-12 form-group" id="ptbid">
+                    <textarea rows="1" cols="10" class="form-control" ng-model="pushTxtTitle"> </textarea>
+                </div>
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <label class="control-label col-md-2" for="pmbid">Message Body</label>
+                <div class="col-md-12 col-lg-12 col-sm-12 form-group" id="pmbid">
+                    <textarea rows="2" cols="50" class="form-control" ng-model="pushTxt"> </textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <label class="control-label col-md-2" for="uid">User Id</label>
+                <div class="col-md-12 col-lg-12 col-sm-12 form-group" id="uid">
+                    <textarea rows="1" cols="10" class="form-control" ng-model="uid"> </textarea>
+                </div>
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <label class="control-label col-md-2" for="pmbid">Caption</label>
+                <div class="col-md-12 col-lg-12 col-sm-12 form-group" id="ucaption">
+                    <textarea rows="2" cols="50" class="form-control" ng-model="ucaption"> </textarea>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div ng-show="ss">
+            <div class="text-center">
+
+                <h1>Angular Test</h1>
+            </div>
+        </div>
+
+        <br />
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-2">
+                <input type="submit" value="Search" class="btn btn-danger" ng-click="Submit()" />
+            </div>
+            <div class="col-md-2">
+                <input type="submit" id="save" value="  Save  " class="btn btn-success" ng-click="Save()" />
+            </div>
+        </div>
+
+        <div ng-show="ListOfContentShow">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Code</th>
+                    <th>Image</th>
+                    <th>Title</th>
+                </tr>
+                <tr ng-repeat="x in listOfContents">
+                    <td>
+                        <input type="checkbox"
+                               value="{{x.ContentCode}}"
+                               ng-click="toggleSelection($event,x.ContentCode,x.imageUrl)"
+                               ng-model-options="{getterSetter: true}">
+                    </td>
+                    <td class="text-center" style="width: 50%"><img src="{{x.imageUrl}}" class="img-responsive" /></td>
+                    <td>{{x.ContentTitle}}</td>
+                </tr>
+            </table>
+
+
+        </div>
+        <br />
+        <div ng-show="noData">
+            <div class="text-center">
+                <h1 style="color: red">No Content found for this Category/Sub Category</h1>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="~/Scripts/dropdownsongster.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#datetimepicker1").datetimepicker();
+        });
+
+        document.getElementById("save").onclick = function () {
+
+            this.disabled = true;
+
+
+        }
+    </script>
+}
+
+

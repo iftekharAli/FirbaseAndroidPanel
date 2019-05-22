@@ -1,0 +1,647 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FirebaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FailedLogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="RefId" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FailedLogs_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="RefId" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Firebase_TokenInfo_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar(max)" />
+          <Property Name="MSISDN" Type="nvarchar(max)" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="IsActive" Type="int" />
+          <Property Name="AppType" Type="nvarchar(max)" />
+          <Property Name="DeviceModel" Type="nvarchar(max)" />
+          <Property Name="DeviceManufacture" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ImageUploads">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="AppType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Logins">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SendLogTables">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="RefId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SendLogTables_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="RefId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_AccessLogGlobal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MSISDN" Type="nvarchar" MaxLength="13" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeStamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_AdAgencyLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiecName" Type="nvarchar(max)" />
+          <Property Name="AddUrl" Type="nvarchar(max)" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_FirebaseSendDesktopNotification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar(max)" />
+          <Property Name="MSISDN" Type="nvarchar(max)" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="Body" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="ImageUrl" Type="nvarchar(max)" />
+          <Property Name="RedirectUrl" Type="nvarchar(max)" />
+          <Property Name="AppType" Type="nvarchar(max)" />
+          <Property Name="isSent" Type="int" />
+          <Property Name="ProcessTime" Type="datetime" />
+          <Property Name="SendTime" Type="datetime" />
+          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="Refid" Type="bigint" />
+          <Property Name="Hour" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_PushMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Body" Type="nvarchar(max)" />
+          <Property Name="ImageUrl" Type="nvarchar(max)" />
+          <Property Name="RedirectUrl" Type="nvarchar(max)" />
+          <Property Name="ProcessTime" Type="datetime" />
+          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="ServiceName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_PushMessage_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Body" Type="nvarchar(max)" />
+          <Property Name="ImageUrl" Type="nvarchar(max)" />
+          <Property Name="ContentCode" Type="nvarchar(max)" />
+          <Property Name="ProcessTime" Type="datetime" />
+          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="ServiceName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TokenInfois">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar(max)" />
+          <Property Name="MSISDN" Type="nvarchar(max)" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="IsActive" Type="int" />
+          <Property Name="AppType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UrlClickLogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefId" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UrlClickLogs_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefId" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UrlManages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Function Name="sp_InsertToken_ForAllApps" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="msisdn" Type="varchar" Mode="In" />
+          <Parameter Name="serviceName" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="token" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DeviceManufacture" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DeviceModel" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="FirebaseModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FailedLogs" EntityType="Self.FailedLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FailedLogs_ForAllApps" EntityType="Self.FailedLogs_ForAllApps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Firebase_TokenInfo_ForAllApps" EntityType="Self.Firebase_TokenInfo_ForAllApps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageUploads" EntityType="Self.ImageUploads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logins" EntityType="Self.Logins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SendLogTables" EntityType="Self.SendLogTables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SendLogTables_ForAllApps" EntityType="Self.SendLogTables_ForAllApps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_AccessLogGlobal" EntityType="Self.tbl_AccessLogGlobal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_AdAgencyLog" EntityType="Self.tbl_AdAgencyLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_FirebaseSendDesktopNotification" EntityType="Self.tbl_FirebaseSendDesktopNotification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PushMessage" EntityType="Self.tbl_PushMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PushMessage_ForAllApps" EntityType="Self.tbl_PushMessage_ForAllApps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TokenInfois" EntityType="Self.TokenInfois" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UrlClickLogs" EntityType="Self.UrlClickLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UrlClickLogs_ForAllApps" EntityType="Self.UrlClickLogs_ForAllApps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UrlManages" EntityType="Self.UrlManages" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FirebaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FailedLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RefId" Type="Int32" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Firebase_TokenInfo_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MSISDN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int32" />
+          <Property Name="AppType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceModel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceManufacture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ImageUpload">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AppType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="SendLogTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RefId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_AccessLogGlobal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MSISDN" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbl_FirebaseSendDesktopNotification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MSISDN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RedirectUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AppType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isSent" Type="Int32" />
+          <Property Name="ProcessTime" Type="DateTime" Precision="3" />
+          <Property Name="SendTime" Type="DateTime" Precision="3" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="Refid" Type="Int64" />
+          <Property Name="Hour" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_PushMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RedirectUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessTime" Type="DateTime" Precision="3" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="ServiceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TokenInfois">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MSISDN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int32" />
+          <Property Name="AppType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UrlClickLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefId" Type="Int32" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="UrlManage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="FirebaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="FailedLogs" EntityType="Self.FailedLog" />
+          <EntitySet Name="Firebase_TokenInfo_ForAllApps" EntityType="Self.Firebase_TokenInfo_ForAllApps" />
+          <EntitySet Name="ImageUploads" EntityType="Self.ImageUpload" />
+          <EntitySet Name="Logins" EntityType="Self.Login" />
+          <EntitySet Name="SendLogTables" EntityType="Self.SendLogTable" />
+          <EntitySet Name="tbl_AccessLogGlobal" EntityType="Self.tbl_AccessLogGlobal" />
+          <EntitySet Name="tbl_FirebaseSendDesktopNotification" EntityType="Self.tbl_FirebaseSendDesktopNotification" />
+          <EntitySet Name="tbl_PushMessage" EntityType="Self.tbl_PushMessage" />
+          <EntitySet Name="TokenInfois" EntityType="Self.TokenInfois" />
+          <EntitySet Name="UrlClickLogs" EntityType="Self.UrlClickLog" />
+          <EntitySet Name="UrlManages" EntityType="Self.UrlManage" />
+          <FunctionImport Name="sp_InsertToken_ForAllApps" ReturnType="Collection(String)">
+            <Parameter Name="msisdn" Mode="In" Type="String" />
+            <Parameter Name="serviceName" Mode="In" Type="String" />
+            <Parameter Name="token" Mode="In" Type="String" />
+            <Parameter Name="DeviceManufacture" Mode="In" Type="String" />
+            <Parameter Name="DeviceModel" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="tbl_PushMessage_ForAllApps" EntityType="FirebaseModel.tbl_PushMessage_ForAllApps" />
+          <EntitySet Name="UrlClickLogs_ForAllApps" EntityType="FirebaseModel.UrlClickLogs_ForAllApps" />
+          <EntitySet Name="FailedLogs_ForAllApps" EntityType="FirebaseModel.FailedLogs_ForAllApps" />
+          <EntitySet Name="SendLogTables_ForAllApps" EntityType="FirebaseModel.SendLogTables_ForAllApps" />
+          <EntitySet Name="tbl_AdAgencyLog" EntityType="FirebaseModel.tbl_AdAgencyLog" />
+        </EntityContainer>
+        <EntityType Name="tbl_PushMessage_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContentCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessTime" Type="DateTime" Precision="3" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="ServiceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UrlClickLogs_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefId" Type="Int32" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="FailedLogs_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RefId" Type="Int32" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="SendLogTables_ForAllApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RefId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_AdAgencyLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiecName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FirebaseModelStoreContainer" CdmEntityContainer="FirebaseEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="FirebaseModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FailedLogs">
+            <EntityTypeMapping TypeName="FirebaseModel.FailedLog">
+              <MappingFragment StoreEntitySet="FailedLogs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Firebase_TokenInfo_ForAllApps">
+            <EntityTypeMapping TypeName="FirebaseModel.Firebase_TokenInfo_ForAllApps">
+              <MappingFragment StoreEntitySet="Firebase_TokenInfo_ForAllApps">
+                <ScalarProperty Name="DeviceManufacture" ColumnName="DeviceManufacture" />
+                <ScalarProperty Name="DeviceModel" ColumnName="DeviceModel" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="MSISDN" ColumnName="MSISDN" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AppType" ColumnName="AppType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImageUploads">
+            <EntityTypeMapping TypeName="FirebaseModel.ImageUpload">
+              <MappingFragment StoreEntitySet="ImageUploads">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="AppType" ColumnName="AppType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="FirebaseModel.Login">
+              <MappingFragment StoreEntitySet="Logins">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SendLogTables">
+            <EntityTypeMapping TypeName="FirebaseModel.SendLogTable">
+              <MappingFragment StoreEntitySet="SendLogTables">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_AccessLogGlobal">
+            <EntityTypeMapping TypeName="FirebaseModel.tbl_AccessLogGlobal">
+              <MappingFragment StoreEntitySet="tbl_AccessLogGlobal">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MSISDN" ColumnName="MSISDN" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_FirebaseSendDesktopNotification">
+            <EntityTypeMapping TypeName="FirebaseModel.tbl_FirebaseSendDesktopNotification">
+              <MappingFragment StoreEntitySet="tbl_FirebaseSendDesktopNotification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="MSISDN" ColumnName="MSISDN" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="RedirectUrl" ColumnName="RedirectUrl" />
+                <ScalarProperty Name="AppType" ColumnName="AppType" />
+                <ScalarProperty Name="isSent" ColumnName="isSent" />
+                <ScalarProperty Name="ProcessTime" ColumnName="ProcessTime" />
+                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Refid" ColumnName="Refid" />
+                <ScalarProperty Name="Hour" ColumnName="Hour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PushMessage">
+            <EntityTypeMapping TypeName="FirebaseModel.tbl_PushMessage">
+              <MappingFragment StoreEntitySet="tbl_PushMessage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="RedirectUrl" ColumnName="RedirectUrl" />
+                <ScalarProperty Name="ProcessTime" ColumnName="ProcessTime" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TokenInfois">
+            <EntityTypeMapping TypeName="FirebaseModel.TokenInfois">
+              <MappingFragment StoreEntitySet="TokenInfois">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="MSISDN" ColumnName="MSISDN" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AppType" ColumnName="AppType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UrlClickLogs">
+            <EntityTypeMapping TypeName="FirebaseModel.UrlClickLog">
+              <MappingFragment StoreEntitySet="UrlClickLogs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UrlManages">
+            <EntityTypeMapping TypeName="FirebaseModel.UrlManage">
+              <MappingFragment StoreEntitySet="UrlManages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_InsertToken_ForAllApps" FunctionName="FirebaseModel.Store.sp_InsertToken_ForAllApps" />
+          <EntitySetMapping Name="tbl_PushMessage_ForAllApps">
+            <EntityTypeMapping TypeName="FirebaseModel.tbl_PushMessage_ForAllApps">
+              <MappingFragment StoreEntitySet="tbl_PushMessage_ForAllApps">
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="ProcessTime" ColumnName="ProcessTime" />
+                <ScalarProperty Name="ContentCode" ColumnName="ContentCode" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UrlClickLogs_ForAllApps">
+            <EntityTypeMapping TypeName="FirebaseModel.UrlClickLogs_ForAllApps">
+              <MappingFragment StoreEntitySet="UrlClickLogs_ForAllApps">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FailedLogs_ForAllApps">
+            <EntityTypeMapping TypeName="FirebaseModel.FailedLogs_ForAllApps">
+              <MappingFragment StoreEntitySet="FailedLogs_ForAllApps">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SendLogTables_ForAllApps">
+            <EntityTypeMapping TypeName="FirebaseModel.SendLogTables_ForAllApps">
+              <MappingFragment StoreEntitySet="SendLogTables_ForAllApps">
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_AdAgencyLog">
+            <EntityTypeMapping TypeName="FirebaseModel.tbl_AdAgencyLog">
+              <MappingFragment StoreEntitySet="tbl_AdAgencyLog">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="AddUrl" ColumnName="AddUrl" />
+                <ScalarProperty Name="ServiecName" ColumnName="ServiecName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

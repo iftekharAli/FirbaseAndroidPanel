@@ -1,0 +1,216 @@
+﻿<div style="margin-top:20px">
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Song Name</label>
+            <input type="text" class="form-control" name="UploadedImage" id="song">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Owner Name</label>
+            <input type="text" class="form-control" name="fullName" id="owner">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Message Title</label>
+            <input type="text" class="form-control" name="UploadedImage" id="msg_t">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Message Body</label>
+            <textarea id="msg_b" class="md-textarea form-control" rows="5"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Send Date Time</label>
+            <div class='input-group date' id='datetimepicker1'>
+                <input type='text' class="form-control" name="Send Date Time" id="dateTimeID" />
+                <span id="date" class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" id="search">Search</button>
+        <button class="btn btn-success" id="save">Save</button>
+
+    </div>
+    <div style="margin-top:18px;">
+        <table id="tbl" class="table table-striped">
+            <thead id="tbl_h">
+                <tr> <th></th> <th>ID</th> <th>Category Id</th> <th>Song Name</th> <th>Song Time</th> <th>Artist Id</th> <th>Song</th> <th>Thumbnail</th> <th>Coin</th> <th>Owner Name</th> <th>Owner Id</th> </tr>
+            </thead>
+
+            <tbody id="tbl_b"></tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+
+    <script>
+
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+
+
+        var count = 0;
+        var songID = null;
+        var songImg = null;
+
+        $(document).ready(function () {
+
+            $("#search").click(function () {
+                var data = {
+                    ownerName: $("#owner").val(),
+                    songName: $("#song").val()
+                }
+
+                console.log(data);
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://202.164.213.242/fbandroid/api/Search/Songster",
+                    data: data,
+                    dataType: "json",
+                    success: function (res) {
+                        $("#tbl_b").empty();
+
+                        count = res.length;
+                        console.log("Count", count);
+
+                        $.each(res, function (i, data) {
+
+                            $("#tbl_b").append("<tr><td><input type='checkbox' id='chk" + i + "' onclick='action(" + data.ID + "," + i + ",\"" + data.Thumbnail +"\")'  value='" + data.ID + "'></td> <td>" + data.ID + "</td><td>" + data.CategoryId + "</td><td>" + data.SongName + "</td><td>" + data.SongTime + "</td><td>" + data.Artist + "</td><td><audio controls> <source src='" + data.SongPath + "' type=audio/mpeg></audio></td> <td><img src='" + data.Thumbnail + "'width='40'height='35' /></td><td>" + data.Coin + "</td><td>" + data.OwnerName + "</td><td>" + data.OwnerId + "</td></tr>");
+                        });
+                    }
+
+                });
+
+            });
+
+
+
+
+            $("#song").keydown(function () {
+                var data = {
+                    ownerName: $("#owner").val(),
+                    songName: $("#song").val()
+                }
+
+                console.log(data);
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://202.164.213.242/fbandroid/api/Search/Songster",
+                    data: data,
+                    dataType: "json",
+                    success: function (res) {
+                        $("#tbl_b").empty();
+
+                        count = res.length;
+                        console.log("Count", count);
+                        $.each(res, function (i, data) {
+
+                            $("#tbl_b").append("<tr><td><input type='checkbox'  id='chk" + i + "' onclick='action(" + data.ID + "," + i + ",\"" + data.Thumbnail +"\")'  value='" + data.ID + "'></td> <td>" + data.ID + "</td><td>" + data.CategoryId + "</td><td>" + data.SongName + "</td><td>" + data.SongTime + "</td><td>" + data.Artist + "</td><td><audio controls> <source src='" + data.SongPath + "' type=audio/mpeg></audio></td> <td><img src='" + data.Thumbnail + "'width='40'height='35' /></td><td>" + data.Coin + "</td><td>" + data.OwnerName + "</td><td>" + data.OwnerId + "</td></tr>");
+                        });
+                    }
+
+                });
+
+            });
+
+
+            $("#save").click(function () {
+
+                var pushData = {
+                    title: $("#msg_t").val(),
+                    body: $("#msg_b").val(),
+                    id: songID,
+                    imgUrl: songImg,
+                    sendTime: $("#dateTimeID").val()
+                }
+
+                console.log( $("#dateTimeID").val());
+                $.ajax({
+                    type: "POST",
+                    url: "http://202.164.213.242/fbandroid/api/Search/pushSave",
+                    data: pushData,
+                    dataType: "json",
+                    success: function (res) {
+					
+					
+                }
+				
+				
+				});
+
+                      window.location.href="http://202.164.213.242/fbandroid/ReportModify";
+                    
+            });
+
+
+
+            $("#owner").keydown(function () {
+                var data = {
+                    ownerName: $("#owner").val(),
+                    songName: $("#song").val()
+                }
+
+                console.log(data);
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://202.164.213.242/fbandroid/api/Search/Songster",
+                    data: data,
+                    dataType: "json",
+                    success: function (res) {
+                        $("#tbl_b").empty();
+                        count = res.length;
+
+                        console.log("Count",count);
+                        $.each(res, function (i, data) {
+
+                            $("#tbl_b").append("<tr><td><input type='checkbox' id='chk" + i + "' onclick='action(" + data.ID + "," + i + ",\"" + data.Thumbnail +"\")' value='" + data.ID + "'></td> <td>" + data.ID + "</td><td>" + data.CategoryId + "</td><td>" + data.SongName + "</td><td>" + data.SongTime + "</td><td>" + data.Artist + "</td><td><audio controls> <source src='" + data.SongPath + "' type=audio/mpeg></audio></td> <td><img src='" + data.Thumbnail + "'width='40'height='35' /></td><td>" + data.Coin + "</td><td>" + data.OwnerName + "</td><td>" + data.OwnerId + "</td></tr>");
+                        });
+                    }
+
+                });
+
+            });
+
+
+           
+
+        });
+
+        function action(id, v, url) {
+            songID = id;
+            songImg = url;
+            console.log(songID);
+            console.log(songImg);
+            console.log(v);
+           
+            for (var i = 0; i <= count; i++) {
+
+                $("#chk"+i).prop("checked", false);
+            }
+
+            $("#chk" +v).prop("checked", true);
+        }
+
+
+    </script>
+
+
+}
+

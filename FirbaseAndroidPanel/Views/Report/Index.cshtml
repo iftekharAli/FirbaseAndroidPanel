@@ -1,0 +1,198 @@
+﻿@using System.Collections
+@model FirbaseAndroidPanel.Models.Report
+
+@{
+    ViewBag.Title = "title";
+  
+}
+
+<h2>Index</h2>
+
+
+
+<div ng-app="myApp" ng-controller="cntrl">
+
+
+
+
+
+    <div class="form-horizontal">
+        <h4>Report</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ServiceName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ServiceName, new SelectList((IEnumerable)ViewData["ServiceName"], "Id", "Name"), "All", new { @class = "form-control", ng_model = "ServiceName" })
+                @Html.ValidationMessageFor(model => model.ServiceName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Type, new SelectList((IEnumerable)ViewData["Type"], "Id", "Name"), "Select Type", new { @class = "form-control", ng_model = "Type" })
+                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <div class="form-group">
+            <label class="control-label col-md-2">FromDate</label>
+            <div class='input-group date col-md-3' id='datetimepickerFromDate'>
+                <input type='datetime' id="fdate" class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", ng_model = "FromDate" } })
+                    @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", ng_model = "EndDate" } })
+                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">EndDate</label>
+            <div class='input-group date col-md-3' id='datetimepickerEndDate'>
+                <input type='datetime' id="edate" class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-default" ng-click="sub()" />
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="tableHide">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <table class="table table-bordered">
+
+                <tr>
+
+                    <th>Date</th>
+                    <th>Total Send</th>
+                    <th>Total Click</th>
+                    <th>Total Failed</th>
+
+                </tr>
+                <tr ng-repeat="x in tresult">
+
+                    <td>{{x.Date | date :  "dd.MM.yyyy"}}</td>
+                    <td>{{x.TotalSend}}</td>
+                    <td>{{x.TotalClick}}</td>
+                    <td>{{x.TotalFailed}}</td>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+    <script>
+        //$(document).ready(function() {
+        //    var date_input = $('input[name="FromDate"]'); //our date input has the name "date"
+        //    var date_input1 = $('input[name="EndDate"]'); //our date input has the name "date"
+        //    var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        //    date_input.datepicker({
+        //        format: 'mm/dd/yyyy',
+        //        container: container,
+        //        todayHighlight: true,
+        //        autoclose: true,
+        //    });
+        //    date_input1.datepicker({
+        //        format: 'mm/dd/yyyy',
+        //        container: container,
+        //        todayHighlight: true,
+        //        autoclose: true,
+        //    });
+        //});
+
+        var raw = "https://wap.shabox.mobi/fbandroid/api/";
+     //  var raw = "../api/";
+        var app = angular.module('myApp', []);
+        app.controller('cntrl',function($scope, $http) {
+            $scope.tableHide = false;
+            $scope.sub = function () {
+                console.log('hii');
+                console.log($scope.EndDate);
+                console.log($scope.FromDate);
+                console.log($scope.ServiceName);
+
+
+                //var fd = '';
+                //var ed = '';
+                //alert($("#edate").val());
+
+                $('#datetimepickerFromDate').datetimepicker().on('dp.change', function (ev) {
+                    // $scope.stardate = 'asaas';
+
+                });
+
+                $('#datetimepickerEndDate').datetimepicker().on('dp.change', function (ev) {
+                    // $scope.stardate = 'asaas';
+
+                });
+
+
+                var data = {
+                    ServiceName: $scope.ServiceName,
+                    Type: $scope.Type,
+                    FromDate: $("#fdate").val(),
+                    EndDate: $("#edate").val()
+                }
+                console.log(data);
+                $http.post(raw + "ReportAngular/DataByService", data).then(function (response) {
+
+                    console.log(response.data.length);
+                    if (response.data.length === 0) {
+                        $scope.tableHide = false;
+                    } else {
+                        $scope.tableHide = true;
+                    }
+                   // $scope.selectedName = response.data;
+                    $scope.tresult = response.data;
+                    // console.log($scope.selectedName);
+                });
+            }
+
+            });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#datetimepickerFromDate").datetimepicker();
+            $("#datetimepickerEndDate").datetimepicker();
+        });
+    </script>
+}

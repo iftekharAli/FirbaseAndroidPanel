@@ -40,8 +40,13 @@ namespace FirbaseAndroidPanel
         public virtual DbSet<UrlClickLog> UrlClickLogs { get; set; }
         public virtual DbSet<UrlManage> UrlManages { get; set; }
         public virtual DbSet<tbl_PushMessage_ForAllApps> tbl_PushMessage_ForAllApps { get; set; }
+        public virtual DbSet<UrlClickLogs_ForAllApps> UrlClickLogs_ForAllApps { get; set; }
+        public virtual DbSet<FailedLogs_ForAllApps> FailedLogs_ForAllApps { get; set; }
+        public virtual DbSet<SendLogTables_ForAllApps> SendLogTables_ForAllApps { get; set; }
+        public virtual DbSet<tbl_AdAgencyLog> tbl_AdAgencyLog { get; set; }
+        public virtual DbSet<tbl_FirebaseSendDesktopNotification_ForAllApps> tbl_FirebaseSendDesktopNotification_ForAllApps { get; set; }
     
-        public virtual ObjectResult<string> sp_InsertToken_ForAllApps(string msisdn, string serviceName, string token)
+        public virtual ObjectResult<string> sp_InsertToken_ForAllApps(string msisdn, string serviceName, string token, string deviceManufacture, string deviceModel)
         {
             var msisdnParameter = msisdn != null ?
                 new ObjectParameter("msisdn", msisdn) :
@@ -55,9 +60,15 @@ namespace FirbaseAndroidPanel
                 new ObjectParameter("token", token) :
                 new ObjectParameter("token", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_InsertToken_ForAllApps", msisdnParameter, serviceNameParameter, tokenParameter);
+            var deviceManufactureParameter = deviceManufacture != null ?
+                new ObjectParameter("DeviceManufacture", deviceManufacture) :
+                new ObjectParameter("DeviceManufacture", typeof(string));
+    
+            var deviceModelParameter = deviceModel != null ?
+                new ObjectParameter("DeviceModel", deviceModel) :
+                new ObjectParameter("DeviceModel", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_InsertToken_ForAllApps", msisdnParameter, serviceNameParameter, tokenParameter, deviceManufactureParameter, deviceModelParameter);
         }
-
-        public System.Data.Entity.DbSet<FirbaseAndroidPanel.Models.DesktopNew> DesktopNews { get; set; }
     }
 }

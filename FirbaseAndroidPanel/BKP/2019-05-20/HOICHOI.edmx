@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HoiChoiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_html5Games">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imgUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
+          <Property Name="url" Type="nvarchar" MaxLength="200" />
+          <Property Name="vendor" Type="int" />
+          <Property Name="status" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="tbl_html5Games_vendor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="VendorName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_html5GamesMap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="int" />
+          <Property Name="GameID" Type="int" />
+        </EntityType>
+        <Function Name="sp_GetGameData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="HoiChoiModelStoreContainer">
+          <EntitySet Name="tbl_html5Games" EntityType="Self.tbl_html5Games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_html5Games_vendor" EntityType="Self.tbl_html5Games_vendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_html5GamesMap" EntityType="Self.tbl_html5GamesMap" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HoiChoiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_html5Games">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Precision="10" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imgUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="vendor" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_html5Games_vendor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="VendorName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbl_html5GamesMap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Precision="10" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="GameID" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="HoiChoiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_html5Games" EntityType="Self.tbl_html5Games" />
+          <EntitySet Name="tbl_html5Games_vendor" EntityType="Self.tbl_html5Games_vendor" />
+          <EntitySet Name="tbl_html5GamesMap" EntityType="Self.tbl_html5GamesMap" />
+          <FunctionImport Name="sp_GetGameData" ReturnType="Collection(HoiChoiModel.sp_GetGameData_Result)" />
+        </EntityContainer>
+        <ComplexType Name="sp_GetGameData_Result">
+          <Property Type="Decimal" Name="ID" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="String" Name="title" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="imgUrl" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="url" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HoiChoiModelStoreContainer" CdmEntityContainer="HoiChoiEntities">
+          <EntitySetMapping Name="tbl_html5Games">
+            <EntityTypeMapping TypeName="HoiChoiModel.tbl_html5Games">
+              <MappingFragment StoreEntitySet="tbl_html5Games">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="imgUrl" ColumnName="imgUrl" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="vendor" ColumnName="vendor" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_html5Games_vendor">
+            <EntityTypeMapping TypeName="HoiChoiModel.tbl_html5Games_vendor">
+              <MappingFragment StoreEntitySet="tbl_html5Games_vendor">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_html5GamesMap">
+            <EntityTypeMapping TypeName="HoiChoiModel.tbl_html5GamesMap">
+              <MappingFragment StoreEntitySet="tbl_html5GamesMap">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetGameData" FunctionName="HoiChoiModel.Store.sp_GetGameData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HoiChoiModel.sp_GetGameData_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="imgUrl" ColumnName="imgUrl" />
+                <ScalarProperty Name="url" ColumnName="url" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
